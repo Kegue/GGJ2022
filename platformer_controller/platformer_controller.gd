@@ -7,6 +7,7 @@ export var input_left : String = "move_left"
 export var input_right : String = "move_right"
 export var input_jump : String = "jump"
 export var input_action : String = "action"
+export var input_dash : String = "dash"
 
 # The max jump height in pixels (holding jump)
 export var max_jump_height = 150 setget set_max_jump_height
@@ -28,6 +29,8 @@ export var coyote_time : float = 0.1
 # Only neccessary when can_hold_jump is off
 # Pressing jump this many seconds before hitting the ground will still make you jump
 export var jump_buffer : float = 0.1
+
+export var boost : float = 100000
 
 
 export var inverted_gravity : bool = false
@@ -82,6 +85,7 @@ func _ready():
 	
 
 func _physics_process(delta):
+	var dash_dir = Vector2()
 	acc.x = 0
 	
 	if is_grounded():
@@ -91,8 +95,10 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed(input_left):
 		acc.x = -max_acceleration
+		dash_dir = Vector2.LEFT
 	if Input.is_action_pressed(input_right):
 		acc.x = max_acceleration
+		dash_dir = Vector2.RIGHT
 	
 	
 	# Check for ground jumps when we can hold jump
@@ -138,11 +144,15 @@ func _physics_process(delta):
 	if not holding_jump and vel.y < 0: # if we released jump and are still rising
 		if not jumps_left < max_jump_amount - 1: # Always jump to max height when we are using a double jump
 			gravity *= release_gravity_multiplier # multiply the gravity so we have a lower jump
+		
 	
 	acc.y = -gravity
 	vel.x *= 1 / (1 + (delta * friction))
 	
 	vel += acc * delta
+	if(Input.is_action_just_pressed(input_dash)):
+		vel += delta * boost * dash_dir
+
 	vel = move_and_slide(vel, Vector2.UP)
 
 
