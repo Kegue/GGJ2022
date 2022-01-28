@@ -251,3 +251,8 @@ func is_grounded():
 
 func _on_Player_inverted_grav():
 	inverted_gravity = !inverted_gravity
+	if has_node("PlayerAnimations"):
+		if inverted_gravity:
+			($PlayerAnimations as AnimationPlayer).play("GravUp",0.15)
+		else:
+			($PlayerAnimations as AnimationPlayer).play("GravDown",0.15)
