@@ -38,5 +38,7 @@ tile_data = PoolIntArray( -655338, 0, 0, -589802, 0, 0, -458758, 0, 0, -524266, 
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -5, -74 )
+min_jump_height = 110
+double_jump_height = 312
 
 [editable path="Player"]
