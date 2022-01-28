@@ -6,6 +6,7 @@ class_name PlatformerController2D
 export var input_left : String = "move_left"
 export var input_right : String = "move_right"
 export var input_jump : String = "jump"
+export var input_action : String = "action"
 
 # The max jump height in pixels (holding jump)
 export var max_jump_height = 150 setget set_max_jump_height
@@ -29,6 +30,7 @@ export var coyote_time : float = 0.1
 export var jump_buffer : float = 0.1
 
 
+export var inverted_gravity : bool = false
 
 
 # not used
@@ -52,6 +54,8 @@ var holding_jump := false
 var vel = Vector2()
 var acc = Vector2()
 
+signal inverted_grav
+
 onready var coyote_timer = Timer.new()
 onready var jump_buffer_timer = Timer.new()
 
@@ -72,11 +76,15 @@ func _ready():
 	jump_buffer_timer.wait_time = jump_buffer
 	jump_buffer_timer.one_shot = true
 	
+	inverted_gravity = false
+	
+	
+	
 
 func _physics_process(delta):
 	acc.x = 0
 	
-	if is_on_floor():
+	if is_grounded():
 		coyote_timer.start()
 	if not coyote_timer.is_stopped():
 		jumps_left = max_jump_amount
@@ -91,12 +99,12 @@ func _physics_process(delta):
 	if can_hold_jump:
 		if Input.is_action_pressed(input_jump):
 			# Dont use double jump when holding down
-			if is_on_floor():
+			if is_grounded():
 				jump()
 	
 	# Check for ground jumps when we cannot hold jump
 	if not can_hold_jump:
-		if not jump_buffer_timer.is_stopped() and is_on_floor():
+		if not jump_buffer_timer.is_stopped() and is_grounded():
 			jump()
 	
 	# Check for jumps in the air
@@ -105,15 +113,24 @@ func _physics_process(delta):
 		jump_buffer_timer.start()
 		
 		# Only jump in the air when press the button down, code above already jumps when we are grounded
-		if not is_on_floor():
+		if not is_grounded():
 			jump()
 		
 	
 	if Input.is_action_just_released(input_jump):
 		holding_jump = false
+		
+	if Input.is_action_just_pressed(input_action):
+		emit_signal("inverted_grav")
+	
+	var gravity
+	
+	if !inverted_gravity:
+		gravity = default_gravity
+	else:
+		gravity = -default_gravity
 	
 	
-	var gravity = default_gravity
 	
 	if vel.y > 0: # If we are falling
 		gravity *= falling_gravity_multiplier
@@ -175,9 +192,15 @@ func jump():
 		
 	if jumps_left > 0:
 		if jumps_left < max_jump_amount: # If we are double jumping
-			vel.y = -double_jump_velocity
+			if inverted_gravity:
+				vel.y = double_jump_velocity
+			else:
+				vel.y = -double_jump_velocity
 		else:
-			vel.y = -jump_velocity
+			if inverted_gravity:
+				vel.y = jump_velocity
+			else:
+				vel.y = -jump_velocity
 		jumps_left -= 1
 	
 	
@@ -212,3 +235,9 @@ func set_double_jump_height(value):
 	double_jump_velocity = calculate_jump_velocity2(double_jump_height, default_gravity)
 
 	
+func is_grounded():
+	return (is_on_floor() && !inverted_gravity) || (is_on_ceiling() && inverted_gravity)
+
+
+func _on_Player_inverted_grav():
+	inverted_gravity = !inverted_gravity
