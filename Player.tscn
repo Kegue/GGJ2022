@@ -43,6 +43,7 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.95, 0.95 )
 script = ExtResource( 1 )
 max_jump_height = 210
 double_jump_height = 397
