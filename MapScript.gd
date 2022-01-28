@@ -9,22 +9,22 @@ func  _process(delta):
 		Global.alternate_dim = !Global.alternate_dim	
 		swap_entity_collisions()
 	
-	if $Player.position.y > min_pos:
-		$Player.position = $P1_spawn.position
+	if $Dim1/Player.position.y > min_pos:
+		$Dim1/Player.position = $Dim1/P1_spawn.position
 		print("Reseted player pos")
 	
-	print($Player.position)
+	print($Dim1/Player.position)
 	
 
 func swap_entity_collisions():
 	print("swapped dimension")
 	if Global.alternate_dim:
-		$Player.set_collision_layer_bit(1,false)
-		$Player.set_collision_layer_bit(2,true)
-		$Tile1.modulate.a = 0.5
-		$Tile2.modulate.a = 1
+		$Dim1/Player.set_collision_layer_bit(1,false)
+		$Dim1/Player.set_collision_layer_bit(2,true)
+		$Dim1/Tile1.modulate.a = 0.5
+		$Dim2/Tile2.modulate.a = 1
 	else:
-		$Player.set_collision_layer_bit(1,true)
-		$Player.set_collision_layer_bit(2,false)
-		$Tile1.modulate.a = 1
-		$Tile2.modulate.a = 0.5
+		$Dim1/Player.set_collision_layer_bit(1,true)
+		$Dim1/Player.set_collision_layer_bit(2,false)
+		$Dim1/Tile1.modulate.a = 1
+		$Dim2/Tile2.modulate.a = 0.5
