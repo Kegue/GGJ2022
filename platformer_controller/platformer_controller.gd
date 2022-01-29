@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
-class_name PlatformerController2D
+class_name Player
 
 # Set these to the name of your action (in the Input Map)
 export var input_left : String = "move_left"
 export var input_right : String = "move_right"
 export var input_jump : String = "jump"
+export var input_action : String = "action"
+export var input_dash : String = "dash"
+export var input_build : String = "build"
 
 # The max jump height in pixels (holding jump)
 export var max_jump_height = 150 setget set_max_jump_height
@@ -28,7 +31,10 @@ export var coyote_time : float = 0.1
 # Pressing jump this many seconds before hitting the ground will still make you jump
 export var jump_buffer : float = 0.1
 
+export var boost : float = 100000
 
+
+export var inverted_gravity : bool = false
 
 
 # not used
@@ -52,8 +58,21 @@ var holding_jump := false
 var vel = Vector2()
 var acc = Vector2()
 
+signal inverted_grav
+signal stuck_on_map
+signal died
+signal damaged
+
 onready var coyote_timer = Timer.new()
-onready var jump_buffer_timer = Timer.new()
+onready var jump_buffer_timer = Timer.new() 
+
+
+export var hp = 3
+export var max_hp = 3
+
+
+
+
 
 func _ready():
 	default_gravity = calculate_gravity(max_jump_height, jump_duration)
@@ -72,8 +91,13 @@ func _ready():
 	jump_buffer_timer.wait_time = jump_buffer
 	jump_buffer_timer.one_shot = true
 	
+	inverted_gravity = false
+	$HUD.setup_HUD(max_hp)
+	
+	
 
 func _physics_process(delta):
+	var dash_dir = Vector2()
 	
 	for index in range(get_slide_count()):
 		var collision = get_slide_collision(index)
@@ -83,27 +107,31 @@ func _physics_process(delta):
 	
 	acc.x = 0
 	
-	if is_on_floor():
+	if is_grounded():
 		coyote_timer.start()
 	if not coyote_timer.is_stopped():
 		jumps_left = max_jump_amount
 	
 	if Input.is_action_pressed(input_left):
+		$AnimatedSprite.flip_h = true
 		acc.x = -max_acceleration
+		dash_dir = Vector2.LEFT
 	if Input.is_action_pressed(input_right):
+		$AnimatedSprite.flip_h = false
 		acc.x = max_acceleration
+		dash_dir = Vector2.RIGHT
 	
 	
 	# Check for ground jumps when we can hold jump
 	if can_hold_jump:
 		if Input.is_action_pressed(input_jump):
 			# Dont use double jump when holding down
-			if is_on_floor():
+			if is_grounded():
 				jump()
 	
 	# Check for ground jumps when we cannot hold jump
 	if not can_hold_jump:
-		if not jump_buffer_timer.is_stopped() and is_on_floor():
+		if not jump_buffer_timer.is_stopped() and is_grounded():
 			jump()
 	
 	# Check for jumps in the air
@@ -112,15 +140,24 @@ func _physics_process(delta):
 		jump_buffer_timer.start()
 		
 		# Only jump in the air when press the button down, code above already jumps when we are grounded
-		if not is_on_floor():
+		if not is_grounded():
 			jump()
 		
 	
 	if Input.is_action_just_released(input_jump):
 		holding_jump = false
+		
+	if Input.is_action_just_pressed(input_action):
+		emit_signal("inverted_grav")
+	
+	var gravity
+	
+	if !inverted_gravity:
+		gravity = default_gravity
+	else:
+		gravity = -default_gravity
 	
 	
-	var gravity = default_gravity
 	
 	if vel.y > 0: # If we are falling
 		gravity *= falling_gravity_multiplier
@@ -128,11 +165,15 @@ func _physics_process(delta):
 	if not holding_jump and vel.y < 0: # if we released jump and are still rising
 		if not jumps_left < max_jump_amount - 1: # Always jump to max height when we are using a double jump
 			gravity *= release_gravity_multiplier # multiply the gravity so we have a lower jump
+		
 	
 	acc.y = -gravity
 	vel.x *= 1 / (1 + (delta * friction))
 	
 	vel += acc * delta
+	if(Input.is_action_just_pressed(input_dash)):
+		vel += delta * boost * dash_dir
+
 	vel = move_and_slide(vel, Vector2.UP)
 
 
@@ -182,9 +223,15 @@ func jump():
 		
 	if jumps_left > 0:
 		if jumps_left < max_jump_amount: # If we are double jumping
-			vel.y = -double_jump_velocity
+			if inverted_gravity:
+				vel.y = double_jump_velocity
+			else:
+				vel.y = -double_jump_velocity
 		else:
-			vel.y = -jump_velocity
+			if inverted_gravity:
+				vel.y = jump_velocity
+			else:
+				vel.y = -jump_velocity
 		jumps_left -= 1
 	
 	
@@ -219,4 +266,37 @@ func set_double_jump_height(value):
 	double_jump_velocity = calculate_jump_velocity2(double_jump_height, default_gravity)
 
 	
+func is_grounded():
+	return (is_on_floor() && !inverted_gravity) || (is_on_ceiling() && inverted_gravity)
+
+
+func _on_Player_inverted_grav():
+	print("Inverted")
+	inverted_gravity = !inverted_gravity
+	if has_node("PlayerAnimations"):
+		if inverted_gravity:
+			($PlayerAnimations as AnimationPlayer).play("GravUp",0.15)
+		else:
+			($PlayerAnimations as AnimationPlayer).play("GravDown",0.15)
+
+
+func damage(amount):
+	hp = hp - amount
+	if hp < 0:
+		hp = 0
+		emit_signal("died")
+		print("Player died")
+	else:
+		emit_signal("damaged")
+		print("Player damaged")
+		$HUD.update_hp(hp)
+	
+
+
+func _on_TestBsico_player_death():
+	if(inverted_gravity):
+		emit_signal("inverted_grav")
+		acc = Vector2.ZERO
+		vel = Vector2.ZERO
+
 
