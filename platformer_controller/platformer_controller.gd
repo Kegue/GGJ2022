@@ -87,6 +87,13 @@ func _ready():
 
 func _physics_process(delta):
 	var dash_dir = Vector2()
+	
+	for index in range(get_slide_count()):
+		var collision = get_slide_collision(index)
+		if collision.collider.get_name() == "Epic_Enemy":
+			if Vector2.UP.dot(collision.normal) > 0.1:
+				vel.y = -double_jump_velocity
+	
 	acc.x = 0
 	
 	if is_grounded():
