@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Epic_Enemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -40,5 +41,11 @@ tile_data = PoolIntArray( -655338, 0, 0, -589802, 0, 0, -458758, 0, 0, -524266, 
 position = Vector2( -5, -74 )
 min_jump_height = 110
 double_jump_height = 312
+
+[node name="Camera2D" parent="Player" index="2"]
+position = Vector2( 47, -106 )
+
+[node name="Epic_Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 412, -508 )
 
 [editable path="Player"]
