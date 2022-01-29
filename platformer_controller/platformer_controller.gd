@@ -92,7 +92,7 @@ func _ready():
 	jump_buffer_timer.one_shot = true
 	
 	inverted_gravity = false
-	
+	$HUD.setup_HUD(max_hp)
 	
 	
 
@@ -286,6 +286,7 @@ func damage(amount):
 	else:
 		emit_signal("damaged")
 		print("Player damaged")
+		$HUD.update_hp(hp)
 	
 
 
