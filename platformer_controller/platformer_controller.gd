@@ -37,6 +37,10 @@ export var boost : float = 100000
 export var inverted_gravity : bool = false
 
 
+
+var coins = 0
+
+
 # not used
 var max_speed = 100
 var acceleration_time = 10
@@ -95,8 +99,14 @@ func _ready():
 	$HUD.setup_HUD(max_hp)
 	
 	
+func add_coin():
+	coins += 1
+	print("Player has ", coins, " coins")
+	$HUD.update_coins(coins)
 
 func _physics_process(delta):
+	
+	
 	var dash_dir = Vector2()
 	
 	for index in range(get_slide_count()):

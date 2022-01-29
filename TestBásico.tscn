@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://mountain_bg.png" type="Texture" id=7]
 [ext_resource path="res://desert.png" type="Texture" id=8]
 [ext_resource path="res://Spikes.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade_in"
@@ -377,6 +378,9 @@ text = "Press \"Q\" to switch dimensions"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Coin" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1189, -193 )
 
 [connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="died" from="Dim1/Player" to="." method="_on_Player_died"]

@@ -5,8 +5,10 @@ export var dist_btwn_hearts = 90
 var ui_heart = preload("res://UI_Heart.tscn")
 
 var hearts = []
+var coins = 0
 
 func setup_HUD(max_hearts):
+	update_coins(coins)
 	
 	for i in hearts:
 		i.queue_free()
@@ -18,6 +20,8 @@ func setup_HUD(max_hearts):
 		heart.position = $Origin.position + Vector2(i*dist_btwn_hearts,0)
 		hearts.append(heart)
 		add_child(heart)
+		
+
 
 
 func update_hp(hp):
@@ -33,3 +37,6 @@ func update_hp(hp):
 		else:
 			hearts[i].get_node("Full").visible = false
 			hearts[i].get_node("Empty").visible = true
+
+func update_coins(coins):
+	$Coins.text = String(coins)
