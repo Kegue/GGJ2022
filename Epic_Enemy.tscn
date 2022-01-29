@@ -16,6 +16,11 @@ region = Rect2( 80, 110, 80, 110 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Kick",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 1 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Walk",
@@ -25,11 +30,6 @@ animations = [ {
 "loop": true,
 "name": "Dead",
 "speed": 2.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "Kick",
-"speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
@@ -44,7 +44,8 @@ extents = Vector2( 10, 6.54681 )
 
 [node name="Epic_Enemy" type="KinematicBody2D"]
 position = Vector2( 330, -189 )
-collision_mask = 7
+collision_layer = 8
+collision_mask = 15
 script = ExtResource( 2 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -52,6 +53,7 @@ position = Vector2( 34, 1 )
 scale = Vector2( 4.76904, 5.52396 )
 enabled = true
 cast_to = Vector2( 0, 10.1 )
+collision_mask = 15
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )

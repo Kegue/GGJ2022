@@ -13,7 +13,7 @@ var direction = RIGHT
 
 var dead = false
 var kick = false
-
+export var atk_dmg = 1;
 
 
 
@@ -66,7 +66,7 @@ func _on_Sides_body_entered(body):
 	if dead == false:
 		if body.get_name() == "Player":
 			kick =  true
-
+			body.damage(atk_dmg)
 			$AnimatedSprite.play("Kick")
 			$Timer2.start()
 

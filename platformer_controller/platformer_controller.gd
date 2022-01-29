@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-class_name PlatformerController2D
+class_name Player
 
 # Set these to the name of your action (in the Input Map)
 export var input_left : String = "move_left"
@@ -59,9 +59,20 @@ var vel = Vector2()
 var acc = Vector2()
 
 signal inverted_grav
+signal stuck_on_map
+signal died
+signal damaged
 
 onready var coyote_timer = Timer.new()
 onready var jump_buffer_timer = Timer.new() 
+
+
+export var hp = 3
+export var max_hp = 3
+
+
+
+
 
 func _ready():
 	default_gravity = calculate_gravity(max_jump_height, jump_duration)
@@ -266,8 +277,22 @@ func _on_Player_inverted_grav():
 			($PlayerAnimations as AnimationPlayer).play("GravDown",0.15)
 
 
+func damage(amount):
+	hp = hp - amount
+	if hp < 0:
+		hp = 0
+		emit_signal("died")
+		print("Player died")
+	else:
+		emit_signal("damaged")
+		print("Player damaged")
+	
+
+
 func _on_TestBsico_player_death():
 	if(inverted_gravity):
 		emit_signal("inverted_grav")
 		acc = Vector2.ZERO
 		vel = Vector2.ZERO
+
+
