@@ -134,7 +134,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed(input_sprint) && is_grounded():
 		$AnimatedSprite.speed_scale = 2
-		acc.x *= 2
+		acc.x *= 1.5
 	else:
 		$AnimatedSprite.speed_scale = 1
 	

@@ -5,9 +5,10 @@ export var min_pos = 1500
 export var max_pos = -3000
 
 onready var anim = $TransitionPlayer
+onready var textAnim = $TextAnimator
 
 func _ready():
-	anim.play("text_fill")
+	textAnim.play("text_fill")
 	swap_entity_collisions()
 	swap_entity_collisions()
 
