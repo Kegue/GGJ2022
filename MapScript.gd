@@ -1,12 +1,13 @@
 extends Node2D
 
 
-export var min_pos = 10000
+export var min_pos = 1500
 export var max_pos = -3000
 
 onready var anim = $TransitionPlayer
 
 func _ready():
+	anim.play("text_fill")
 	swap_entity_collisions()
 	swap_entity_collisions()
 
@@ -28,12 +29,16 @@ func swap_entity_collisions():
 		$Dim1/Player.set_collision_mask_bit(2,true)
 		$Dim1/Tile1.modulate.a = 0
 		$Dim2/Tile2.modulate.a = 1
+		$ParallaxBackground/ParallaxLayer2/Sprite.visible = false
+		$ParallaxBackground/ParallaxLayer3/Sprite.visible = true
 	else:
 		
 		$Dim1/Player.set_collision_mask_bit(1,true)
 		$Dim1/Player.set_collision_mask_bit(2,false)
 		$Dim1/Tile1.modulate.a = 1
 		$Dim2/Tile2.modulate.a = 0
+		$ParallaxBackground/ParallaxLayer2/Sprite.visible = true
+		$ParallaxBackground/ParallaxLayer3/Sprite.visible = false
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
