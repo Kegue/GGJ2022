@@ -21,20 +21,20 @@ animations = [ {
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 5.0
+"name": "Dead",
+"speed": 2.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Kick",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "Dead",
-"speed": 2.0
+"name": "Idle",
+"speed": 5.0
 } ]
 
 [node name="Epic_Enemy" type="KinematicBody2D"]
@@ -50,8 +50,7 @@ cast_to = Vector2( 0, 10.1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-animation = "Dead"
-frame = 1
+animation = "Idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 4, 10 )
@@ -60,5 +59,9 @@ polygon = PoolVector2Array( -7.54869, 0.18103, -9.64555, 2.53441, -8.59713, 7.06
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 8, -45 )
+scale = Vector2( 5, 2 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout_death"]
