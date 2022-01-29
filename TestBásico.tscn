@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://MapScript.gd" type="Script" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
 
 [node name="TestBásico" type="Node2D"]
 script = ExtResource( 3 )
@@ -21,9 +23,13 @@ double_jump_height = 312
 [node name="Camera2D" parent="Dim1/Player" index="2"]
 zoom = Vector2( 2, 2 )
 
-[node name="Tile1" type="TileMap" parent="Dim1"]
+[node name="Tile1" type="StaticBody2D" parent="Dim1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Tilemap1" type="TileMap" parent="Dim1/Tile1"]
 tile_set = ExtResource( 1 )
-collision_use_kinematic = true
+collision_use_parent = true
 collision_layer = 0
 collision_mask = 2
 format = 1
@@ -31,10 +37,15 @@ tile_data = PoolIntArray( -983046, 0, 0, -983045, 0, 0, -983044, 0, 0, -983043, 
 
 [node name="Dim2" type="Node2D" parent="."]
 
-[node name="Tile2" type="TileMap" parent="Dim2"]
+[node name="Tile2" type="StaticBody2D" parent="Dim2"]
+collision_layer = 0
+collision_mask = 4
+physics_material_override = SubResource( 1 )
+
+[node name="Tilemap2" type="TileMap" parent="Dim2/Tile2"]
 modulate = Color( 0.976471, 0.631373, 0.631373, 1 )
 tile_set = ExtResource( 1 )
-collision_use_kinematic = true
+collision_use_parent = true
 collision_layer = 0
 collision_mask = 4
 format = 1
