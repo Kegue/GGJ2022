@@ -306,21 +306,15 @@ position = Vector2( 1336, -209 )
 
 [node name="Dim1" type="Node2D" parent="."]
 
+[node name="Player" parent="Dim1" instance=ExtResource( 2 )]
+position = Vector2( 34, -62 )
+
 [node name="P1_spawn" type="Position2D" parent="Dim1"]
 position = Vector2( -5, -74 )
 
-[node name="Player" parent="Dim1" instance=ExtResource( 2 )]
-position = Vector2( -5, -74 )
-collision_layer = 6
-min_jump_height = 110
-double_jump_height = 312
-
-[node name="Camera2D" parent="Dim1/Player" index="2"]
-zoom = Vector2( 2, 2 )
-
 [node name="Tile1" type="StaticBody2D" parent="Dim1"]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 0
 
 [node name="Plants_TM" type="TileMap" parent="Dim1/Tile1"]
 scale = Vector2( 4, 4 )
@@ -344,7 +338,7 @@ tile_data = PoolIntArray( -3473434, 2, 0, -3473433, 2, 0, -3473432, 2, 0, -34734
 
 [node name="Tile2" type="StaticBody2D" parent="Dim2"]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 0
 physics_material_override = SubResource( 1 )
 
 [node name="Blocks_TM" type="TileMap" parent="Dim2/Tile2"]
@@ -365,6 +359,3 @@ format = 1
 tile_data = PoolIntArray( -851993, 1, 0, -851991, 2, 0, -851986, 1, 0, -917457, 3, 2, -917456, 3, 3, -917455, 3, 3, -917454, 3, 3, -917453, 3, 3, -917452, 3, 65536, -851916, 3, 0, -786380, 3, 65538, -786379, 3, 3, -786378, 3, 3, -786377, 3, 3, -786376, 3, 3, -786375, 3, 65539, -655373, 1, 0, -720844, 3, 0, -589840, 2, 0, -589837, 3, 0, -655311, 3, 2, -655310, 3, 3, -655309, 3, 3, -655308, 3, 1, -655307, 3, 3, -655306, 3, 3, -655305, 3, 3, -655304, 3, 65539, -524303, 3, 2, -524302, 3, 3, -524301, 3, 65536, -589772, 3, 0, -458766, 3, 2, -458765, 3, 1, -458764, 3, 3, -458763, 3, 65539, -524240, 3, 2, -524239, 3, 3, -524238, 3, 3, -524237, 3, 3, -524236, 3, 65536, -393229, 3, 0, -458700, 3, 0, -327693, 3, 0, -393164, 3, 0, -262164, 2, 0, -262162, 1, 0, -262160, 2, 0, -262157, 3, 65537, -327629, 3, 2, -327628, 3, 1, -327627, 3, 3, -327626, 3, 3, -327625, 3, 3, -327624, 3, 65539, -327608, 3, 65538, -327607, 3, 65539, -327589, 3, 0, -196618, 2, 0, -262109, 3, 2, -262108, 3, 3, -262107, 3, 1, -262106, 3, 65539, -262092, 3, 0, -262073, 3, 2, -262072, 3, 65536, -262054, 3, 2, -262053, 3, 1, -262052, 3, 3, -262051, 3, 65539, -196594, 2, 0, -196571, 3, 0, -196556, 3, 0, -196536, 3, 0, -196517, 3, 0, -131035, 3, 0, -131020, 3, 0, -131000, 3, 0, -130981, 3, 0, -8, 1, 0, -6, 2, 0, -65534, 4, 4, -65531, 1, 0, -65508, 1, 0, -65503, 2, 0, -65499, 3, 65537, -65497, 1, 0, -65484, 3, 65537, -65464, 3, 65537, -65445, 3, 65537, 131067, 1, 0, 131070, 2, 0, 65568, 2, 0, 65570, 1, 0, 65588, 1, 0, 65606, 1, 0, 65607, 2, 0, 65623, 1, 0, 65624, 2, 0, 65627, 1, 0, 196608, 1, 0, 196610, 2, 0, 196645, 2, 0, 196647, 1, 0, 196663, 2, 0, 196665, 1, 0, 196683, 2, 0, 196701, 2, 0, 196702, 1, 0 )
 
 [connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="inverted_grav" from="Dim1/Player" to="Dim1/Player" method="_on_Player_inverted_grav"]
-
-[editable path="Dim1/Player"]

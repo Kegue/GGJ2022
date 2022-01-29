@@ -24,23 +24,14 @@ func swap_entity_collisions():
 	
 	if Global.alternate_dim:
 		
-		for vert in $Dim1/Player.get_node("CollisionPolygon2D").polygon:
-			if $Dim1/Tile1/Blocks_TM.get_cellv($Dim1/Player.to_local(vert)) != TileMap.INVALID_CELL:
-				print("Colliding with the map! Not changing dimensions")
-				return
-		
-		$Dim1/Player.set_collision_layer_bit(1,false)
-		$Dim1/Player.set_collision_layer_bit(2,true)
+		$Dim1/Player.set_collision_mask_bit(1,false)
+		$Dim1/Player.set_collision_mask_bit(2,true)
 		$Dim1/Tile1.modulate.a = 0
 		$Dim2/Tile2.modulate.a = 1
 	else:
 		
-		for vert in $Dim1/Player.get_node("CollisionPolygon2D").polygon:
-			if $Dim2/Tile2/Blocks_TM.get_cellv($Dim1/Player.to_local(vert)) != TileMap.INVALID_CELL:
-				print("Colliding with the map! Not changing dimensions")
-				return
-		$Dim1/Player.set_collision_layer_bit(1,true)
-		$Dim1/Player.set_collision_layer_bit(2,false)
+		$Dim1/Player.set_collision_mask_bit(1,true)
+		$Dim1/Player.set_collision_mask_bit(2,false)
 		$Dim1/Tile1.modulate.a = 1
 		$Dim2/Tile2.modulate.a = 0
 

@@ -65,6 +65,7 @@ polygon = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 2, 2 )
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="."]
 anims/GravDown = SubResource( 1 )
@@ -97,6 +98,15 @@ scale = Vector2( 4.16, 0.599999 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sides"]
 position = Vector2( 0, 2.5 )
 scale = Vector2( 3.37751, 1.45179 )
+
+[node name="HUD" type="Container" parent="."]
+margin_left = -540.0
+margin_top = -317.0
+margin_right = 540.0
+margin_bottom = 317.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="StuckDetection" to="." method="_on_StuckDetection_body_entered"]
 [connection signal="body_entered" from="Top&Bot" to="." method="_on_TopBot_body_entered"]
