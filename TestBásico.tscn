@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://sky_full_of_stars.png" type="Texture" id=8]
 [ext_resource path="res://Characters/116aa556-6d14-41e8-9629-696da68b42f3.png" type="Texture" id=9]
 [ext_resource path="res://mountain_night.png" type="Texture" id=10]
+[ext_resource path="res://Characters/TextFont.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade_in"
@@ -41,22 +43,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "text_fill"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("../RichTextLabel:percent_visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
 }
 
 [sub_resource type="TileSet" id=4]
@@ -330,6 +316,22 @@ points = PoolVector2Array( 18, 18, 0, 18, 0, 0, 18, 0 )
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="Animation" id=11]
+resource_name = "text_fill"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
 [node name="TestBásico" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -337,7 +339,6 @@ script = ExtResource( 3 )
 root_node = NodePath("../CanvasLayer")
 anims/fade_in = SubResource( 2 )
 anims/fade_out = SubResource( 3 )
-anims/text_fill = SubResource( 7 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -355,7 +356,7 @@ position = Vector2( 1336, -209 )
 
 [node name="Dim1" type="Node2D" parent="."]
 
-[node name="Player" parent="Dim1" instance=ExtResource( 2 )]
+[node name="Player" parent="Dim1" groups=["Players"] instance=ExtResource( 2 )]
 position = Vector2( 34, -62 )
 min_jump_height = 100
 
@@ -463,19 +464,23 @@ texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 4800, 768 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 386.0
-margin_top = -457.0
-margin_right = 607.0
-margin_bottom = -439.0
-rect_scale = Vector2( 2, 2 )
-visible_characters = 0
+[node name="Label" type="Label" parent="."]
+margin_left = 320.0
+margin_top = -531.0
+margin_right = 923.0
+margin_bottom = -463.0
+custom_fonts/font = ExtResource( 11 )
+text = "Press \"Q\" to shift dimensions"
 percent_visible = 0.0
-text = "Press \"Q\" to switch dimensions"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextAnimator" type="AnimationPlayer" parent="."]
+anims/text_fill = SubResource( 11 )
+
+[node name="Coin" parent="." instance=ExtResource( 12 )]
+position = Vector2( 340, -52 )
 
 [connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="inverted_grav" from="Dim1/Player" to="Dim1/Player" method="_on_Player_inverted_grav"]

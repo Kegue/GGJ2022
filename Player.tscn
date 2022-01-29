@@ -2,7 +2,7 @@
 
 [ext_resource path="res://platformer_controller/platformer_controller.gd" type="Script" id=1]
 [ext_resource path="res://Characters/creature-sheet (1).png" type="Texture" id=2]
-[ext_resource path="res://Coins/gold_1.png" type="Texture" id=3]
+[ext_resource path="res://tile_0151.png" type="Texture" id=3]
 [ext_resource path="res://Kenney Future.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://HUD.gd" type="Script" id=5]
 
@@ -32,8 +32,8 @@ animations = [ {
 
 [sub_resource type="DynamicFont" id=10]
 size = 20
-outline_size = 1
-outline_color = Color( 0.901961, 0.654902, 0, 1 )
+outline_size = 4
+outline_color = Color( 0.435294, 0.243137, 0.262745, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=1]
@@ -90,7 +90,7 @@ max_jump_amount = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 6, 6 )
 frames = SubResource( 9 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="HUD" type="Node2D" parent="."]
@@ -102,23 +102,23 @@ script = ExtResource( 5 )
 position = Vector2( -989.474, -549.474 )
 
 [node name="CoinImage" type="TextureRect" parent="HUD"]
-margin_left = -1016.84
-margin_top = -469.474
-margin_right = -932.842
-margin_bottom = -385.474
-rect_scale = Vector2( 0.784652, 0.784652 )
+margin_left = -1053.0
+margin_top = -489.0
+margin_right = -1035.0
+margin_bottom = -471.0
+rect_scale = Vector2( 7, 7 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Coins" type="Label" parent="HUD"]
-margin_left = -933.684
-margin_top = -469.474
-margin_right = -893.684
-margin_bottom = -446.474
+margin_left = -911.579
+margin_top = -462.105
+margin_right = -871.579
+margin_bottom = -439.105
 rect_scale = Vector2( 2.79859, 3.25919 )
-custom_colors/font_color = Color( 1, 0.772549, 0, 1 )
+custom_colors/font_color = Color( 0.956863, 0.705882, 0.105882, 1 )
 custom_fonts/font = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
