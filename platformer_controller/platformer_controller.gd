@@ -271,6 +271,7 @@ func is_grounded():
 
 
 func _on_Player_inverted_grav():
+	print("Inverted")
 	inverted_gravity = !inverted_gravity
 	if has_node("PlayerAnimations"):
 		if inverted_gravity:

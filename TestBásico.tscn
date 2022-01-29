@@ -398,3 +398,4 @@ __meta__ = {
 }
 
 [connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="inverted_grav" from="Dim1/Player" to="Dim1/Player" method="_on_Player_inverted_grav"]
