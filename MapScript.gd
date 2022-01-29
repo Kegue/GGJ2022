@@ -48,7 +48,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			swap_entity_collisions()
 			anim.play("fade_out")
 			
-
-
-func _on_Player_died(player):
-	pass # Replace with function body.
