@@ -287,7 +287,7 @@ func damage(amount):
 		emit_signal("died")
 		print("Player died")
 	else:
-		emit_signal("damaged")
+		emit_signal("damaged",self)
 		print("Player damaged")
 		$HUD.update_hp(hp)
 	
