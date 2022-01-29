@@ -113,9 +113,11 @@ func _physics_process(delta):
 		jumps_left = max_jump_amount
 	
 	if Input.is_action_pressed(input_left):
+		$AnimatedSprite.flip_h = true
 		acc.x = -max_acceleration
 		dash_dir = Vector2.LEFT
 	if Input.is_action_pressed(input_right):
+		$AnimatedSprite.flip_h = false
 		acc.x = max_acceleration
 		dash_dir = Vector2.RIGHT
 	
