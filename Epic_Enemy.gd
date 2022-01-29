@@ -22,8 +22,11 @@ func _ready():
 
 func death():
 	dead = true
-	
+
+	$AnimatedSprite.stop()
+
 	$AnimatedSprite.play("Dead")
+	
 	$CollisionPolygon2D.set_deferred("disabled", true)
 	$Sides/CollisionShape2D.set_deferred("disabled", true)
 	$Top/CollisionShape2D.set_deferred("disabled", true)
@@ -68,9 +71,10 @@ func _on_Sides_body_entered(body):
 		if body.get_name() == "Player":
 			kick =  true
 			body.damage(atk_dmg)
-			$AnimatedSprite.play("Kick")
+			direction = -direction
 			$Timer2.start()
 
 
 func _on_Timer2_timeout():
 	kick = false
+	
