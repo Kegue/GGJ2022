@@ -8,6 +8,7 @@ export var input_right : String = "move_right"
 export var input_jump : String = "jump"
 export var input_action : String = "action"
 export var input_dash : String = "dash"
+export var input_build : String = "build"
 
 # The max jump height in pixels (holding jump)
 export var max_jump_height = 150 setget set_max_jump_height
@@ -60,7 +61,7 @@ var acc = Vector2()
 signal inverted_grav
 
 onready var coyote_timer = Timer.new()
-onready var jump_buffer_timer = Timer.new()
+onready var jump_buffer_timer = Timer.new() 
 
 func _ready():
 	default_gravity = calculate_gravity(max_jump_height, jump_duration)
@@ -256,3 +257,10 @@ func _on_Player_inverted_grav():
 			($PlayerAnimations as AnimationPlayer).play("GravUp",0.15)
 		else:
 			($PlayerAnimations as AnimationPlayer).play("GravDown",0.15)
+
+
+func _on_TestBsico_player_death():
+	if(inverted_gravity):
+		emit_signal("inverted_grav")
+		acc = Vector2.ZERO
+		vel = Vector2.ZERO
