@@ -74,6 +74,13 @@ func _ready():
 	
 
 func _physics_process(delta):
+	
+	for index in range(get_slide_count()):
+		var collision = get_slide_collision(index)
+		if collision.collider.get_name() == "Epic_Enemy":
+			if Vector2.UP.dot(collision.normal) > 0.1:
+				vel.y = -double_jump_velocity
+	
 	acc.x = 0
 	
 	if is_on_floor():
@@ -212,3 +219,4 @@ func set_double_jump_height(value):
 	double_jump_velocity = calculate_jump_velocity2(double_jump_height, default_gravity)
 
 	
+

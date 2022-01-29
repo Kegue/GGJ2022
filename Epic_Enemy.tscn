@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Characters/Zombie/zombie_tilesheet.png" type="Texture" id=1]
 [ext_resource path="res://Epic_Enemy.gd" type="Script" id=2]
@@ -37,6 +37,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 6.54681 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
 [node name="Epic_Enemy" type="KinematicBody2D"]
 position = Vector2( 330, -189 )
 collision_mask = 7
@@ -55,13 +60,32 @@ animation = "Idle"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 4, 10 )
 scale = Vector2( 4.76904, 5.52396 )
-polygon = PoolVector2Array( -7.54869, 0.18103, -9.64555, 2.53441, -8.59713, 7.06015, -7.12932, 7.42221, -5.24215, 8.32736, 7.12933, 8.32736, 6.91964, -8.68942, -5.66152, -8.87045 )
+polygon = PoolVector2Array( -7.54869, 0.18103, -7.339, 2.53441, -7.12932, 7.42221, -7.12932, 7.42221, -5.24215, 8.32736, 7.12933, 8.32736, 6.91964, -8.68942, -5.66152, -8.87045 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Top" type="Area2D" parent="."]
 position = Vector2( 8, -45 )
 scale = Vector2( 5, 2 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2( -0.800003, 3.5 )
+scale = Vector2( 0.74006, -0.152847 )
+shape = SubResource( 4 )
+
+[node name="Sides" type="Area2D" parent="."]
+position = Vector2( 8, -45 )
+scale = Vector2( 5, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sides"]
+position = Vector2( -1.2, 30 )
+scale = Vector2( 0.769806, 2.07475 )
+shape = SubResource( 5 )
+
+[node name="Timer2" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout_death"]
+[connection signal="body_entered" from="Top" to="." method="_on_Top_body_entered"]
+[connection signal="body_entered" from="Sides" to="." method="_on_Sides_body_entered"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

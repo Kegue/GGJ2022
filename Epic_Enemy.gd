@@ -15,13 +15,18 @@ var dead = false
 var kick = false
 
 
+
+
 func _ready():
 	pass
 
 func death():
 	dead = true
+	
 	$AnimatedSprite.play("Dead")
-	$CollisionPolygon2D.disabled = true
+	$CollisionPolygon2D.set_deferred("disabled", true)
+	$Sides/CollisionShape2D.set_deferred("disabled", true)
+	$Top/CollisionShape2D.set_deferred("disabled", true)
 	$Timer.start()
 
 func _physics_process(delta):
@@ -46,12 +51,25 @@ func _physics_process(delta):
 			direction = -direction
 			$RayCast2D.position.x *=-1
 		
-		for i in get_slide_count():
-			var collision = get_slide_collision(i)
-			if collision.collider.name == "Player":
-				kick =  true
-				$AnimatedSprite.play("Kick")
+		
 
 
 func _on_Timer_timeout_death():
 	queue_free()
+
+
+func _on_Top_body_entered(body):
+	if body.get_name() == "Player":
+		death()
+
+func _on_Sides_body_entered(body):
+	if dead == false:
+		if body.get_name() == "Player":
+			kick =  true
+
+			$AnimatedSprite.play("Kick")
+			$Timer2.start()
+
+
+func _on_Timer2_timeout():
+	kick = false
