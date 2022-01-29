@@ -28,6 +28,7 @@ func death():
 	$Sides/CollisionShape2D.set_deferred("disabled", true)
 	$Top/CollisionShape2D.set_deferred("disabled", true)
 	$Timer.start()
+	
 
 func _physics_process(delta):
 	if !dead && !kick:

@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Epic_Enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://MovingPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://MapScript.gd" type="Script" id=3]
+[ext_resource path="res://tiles_packed.png" type="Texture" id=4]
+[ext_resource path="res://tilemap_packed.png" type="Texture" id=5]
+[ext_resource path="res://Epic_Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://MovingPlatform.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -41,7 +45,18 @@ tile_data = PoolIntArray( -458758, 0, 0, -524266, 0, 0, -393222, 0, 0, -458747, 
 [node name="Node2D" parent="TileMap" instance=ExtResource( 4 )]
 position = Vector2( 390, -131 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Epic_Enemy" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1336, -209 )
+
+[node name="Dim1" type="Node2D" parent="."]
+
+[node name="Epic_Enemy2" parent="Dim1" instance=ExtResource( 6 )]
+position = Vector2( 341, -113 )
+
+[node name="Player" parent="Dim1" instance=ExtResource( 2 )]
+position = Vector2( 34, -62 )
+
+[node name="P1_spawn" type="Position2D" parent="Dim1"]
 position = Vector2( -5, -74 )
 min_jump_height = 110
 double_jump_height = 312
@@ -55,4 +70,10 @@ zoom = Vector2( 2, 2 )
 position = Vector2( 408, -534 )
 scale = Vector2( 1, 1.56 )
 
-[editable path="Player"]
+[node name="Node2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1129, -436 )
+
+[node name="Coin" parent="." instance=ExtResource( 8 )]
+position = Vector2( -393, -241 )
+
+[connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

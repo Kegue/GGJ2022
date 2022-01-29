@@ -77,7 +77,7 @@ func _physics_process(delta):
 	
 	for index in range(get_slide_count()):
 		var collision = get_slide_collision(index)
-		if collision.collider.get_name() == "Epic_Enemy":
+		if collision.collider.is_in_group("Enemies"):
 			if Vector2.UP.dot(collision.normal) > 0.1:
 				vel.y = -double_jump_velocity
 	
