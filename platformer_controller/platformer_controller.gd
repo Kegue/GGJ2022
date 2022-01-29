@@ -7,7 +7,7 @@ export var input_left : String = "move_left"
 export var input_right : String = "move_right"
 export var input_jump : String = "jump"
 export var input_action : String = "action"
-export var input_dash : String = "dash"
+export var input_sprint : String = "sprint"
 export var input_build : String = "build"
 
 # The max jump height in pixels (holding jump)
@@ -57,6 +57,7 @@ var holding_jump := false
 
 var vel = Vector2()
 var acc = Vector2()
+var dash_dir = Vector2()
 
 signal inverted_grav
 signal stuck_on_map
@@ -97,8 +98,6 @@ func _ready():
 	
 
 func _physics_process(delta):
-	var dash_dir = Vector2()
-	
 	for index in range(get_slide_count()):
 		var collision = get_slide_collision(index)
 		if collision.collider.get_name() == "Epic_Enemy":
@@ -121,6 +120,11 @@ func _physics_process(delta):
 		acc.x = max_acceleration
 		dash_dir = Vector2.RIGHT
 	
+	if Input.is_action_pressed(input_sprint) && is_grounded():
+		$AnimatedSprite.speed_scale = 2
+		acc.x *= 2
+	else:
+		$AnimatedSprite.speed_scale = 1
 	
 	# Check for ground jumps when we can hold jump
 	if can_hold_jump:
@@ -171,8 +175,6 @@ func _physics_process(delta):
 	vel.x *= 1 / (1 + (delta * friction))
 	
 	vel += acc * delta
-	if(Input.is_action_just_pressed(input_dash)):
-		vel += delta * boost * dash_dir
 
 	vel = move_and_slide(vel, Vector2.UP)
 
