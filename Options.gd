@@ -10,6 +10,10 @@ func _ready():
 
 func _on_Music_toggled(button_pressed):
 	settings.music_enabled = $Music/OnOf/CheckButton.pressed
+	if settings.music_enabled == true:
+		Music.play()
+	else:
+		Music.stop()
 
 
 func _on_Back_pressed():
@@ -26,6 +30,7 @@ func _on_stress_toggled(button_pressed):
 
 func _on_MusicVol_value_changed(value):
 	settings.music_volume = value
+	Music.set_volume_db(value-30)
 
 
 func _on_FxVol_value_changed(value):

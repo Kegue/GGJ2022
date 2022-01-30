@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 Global="*res://Global.gd"
 settings="*res://Loader/global_settings.gd"
+Music="*res://Music.tscn"
 
 [display]
 

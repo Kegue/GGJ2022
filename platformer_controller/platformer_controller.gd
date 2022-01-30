@@ -39,6 +39,7 @@ export var inverted_gravity : bool = false
 
 
 var coins = 0
+var gravity = 0
 
 
 # not used
@@ -104,6 +105,11 @@ func add_coin():
 	coins += 1
 	print("Player has ", coins, " coins")
 	$HUD.update_coins(coins)
+	
+func add_gravity():
+	gravity += 1
+	print("Player has ", coins, " coins")
+	$HUD.update_gravity(gravity)
 
 func _physics_process(delta):
 	

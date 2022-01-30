@@ -34,21 +34,21 @@ __meta__ = {
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 margin_right = 196.0
-margin_bottom = 33.0
+margin_bottom = 28.0
 custom_fonts/font = ExtResource( 1 )
 text = "Start Game"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
-margin_top = 37.0
+margin_top = 32.0
 margin_right = 196.0
-margin_bottom = 70.0
+margin_bottom = 60.0
 custom_fonts/font = ExtResource( 1 )
 text = "Options"
 
 [node name="QuitBottom" type="Button" parent="VBoxContainer"]
-margin_top = 74.0
+margin_top = 64.0
 margin_right = 196.0
-margin_bottom = 107.0
+margin_bottom = 92.0
 custom_fonts/font = ExtResource( 1 )
 text = "Quit Game"
 

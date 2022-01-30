@@ -6,9 +6,11 @@ var ui_heart = preload("res://UI_Heart.tscn")
 
 var hearts = []
 var coins = 0
+var gravity = 0
 
 func setup_HUD(max_hearts):
 	update_coins(coins)
+	update_gravity(gravity)
 	
 	for i in hearts:
 		i.queue_free()
@@ -40,3 +42,6 @@ func update_hp(hp):
 
 func update_coins(coins):
 	$Coins.text = String(coins)
+	
+func update_gravity(gravity):
+	$Gravity.text = String(gravity)

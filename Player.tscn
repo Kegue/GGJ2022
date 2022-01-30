@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://platformer_controller/platformer_controller.gd" type="Script" id=1]
 [ext_resource path="res://Characters/creature-sheet (1).png" type="Texture" id=2]
 [ext_resource path="res://tile_0151.png" type="Texture" id=3]
 [ext_resource path="res://Kenney Future.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://HUD.gd" type="Script" id=5]
+[ext_resource path="res://gravity.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -34,6 +35,12 @@ animations = [ {
 size = 20
 outline_size = 4
 outline_color = Color( 0.435294, 0.243137, 0.262745, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+outline_size = 4
+outline_color = Color( 0.00392157, 0.0901961, 1, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=1]
@@ -120,6 +127,29 @@ margin_bottom = -439.105
 rect_scale = Vector2( 2.79859, 3.25919 )
 custom_colors/font_color = Color( 0.956863, 0.705882, 0.105882, 1 )
 custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+margin_left = -1049.47
+margin_top = -384.211
+margin_right = -1031.47
+margin_bottom = -366.211
+rect_scale = Vector2( 7, 7 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gravity" type="Label" parent="HUD"]
+margin_left = -911.579
+margin_top = -360.0
+margin_right = -871.579
+margin_bottom = -337.0
+rect_scale = Vector2( 2.7, 3.2 )
+custom_colors/font_color = Color( 0, 0.694118, 1, 1 )
+custom_fonts/font = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
