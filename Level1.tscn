@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Gravity.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Finnish Flag.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Spike.tscn" type="PackedScene" id=15]
+[ext_resource path="res://TutorialText.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade_in"
@@ -433,11 +434,11 @@ __meta__ = {
 [node name="Dim1" type="Node2D" parent="."]
 
 [node name="Player" parent="Dim1" groups=["Players"] instance=ExtResource( 2 )]
-position = Vector2( 34, -62 )
+position = Vector2( -328, -213 )
 min_jump_height = 100
 
 [node name="P1_spawn" type="Position2D" parent="Dim1"]
-position = Vector2( -5, -74 )
+position = Vector2( -367, -225 )
 
 [node name="Tile1" type="StaticBody2D" parent="Dim1"]
 z_index = 1
@@ -705,6 +706,10 @@ position = Vector2( 295, -48 )
 
 [node name="Gravity10" parent="Coins" instance=ExtResource( 13 )]
 position = Vector2( 2173, -886 )
+
+[node name="TutorialText" parent="." instance=ExtResource( 16 )]
+position = Vector2( 40, -472 )
+text = "Try picking up the coin and pressing \"E\"."
 
 [connection signal="animation_finished" from="TransitionPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="inverted_grav" from="Dim1/Player" to="Dim1/Player" method="_on_Player_inverted_grav"]
