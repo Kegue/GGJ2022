@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Menu.gd" type="Script" id=2]
 [ext_resource path="res://MainMenu.png" type="Texture" id=3]
 [ext_resource path="res://UNSTEADY.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://Preview.ogg" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
@@ -75,6 +76,9 @@ margin_bottom = 120.0
 rect_scale = Vector2( 2.12, 1.64 )
 custom_fonts/font = SubResource( 2 )
 text = "Shifter"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
