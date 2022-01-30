@@ -26,6 +26,7 @@ func death():
 	$AnimatedSprite.stop()
 
 	$AnimatedSprite.play("Dead")
+	$AnimationPlayer.play("die")
 	
 	$CollisionPolygon2D.set_deferred("disabled", true)
 	$Sides/CollisionShape2D.set_deferred("disabled", true)
@@ -59,7 +60,14 @@ func _physics_process(delta):
 
 
 func _on_Timer_timeout_death():
-	queue_free()
+	$AnimatedSprite.visible = false
+	$ParticlesDeath1.emitting = true
+	$ParticlesDeath2.emitting = true
+	$ParticlesDeath3.emitting = true
+	$ParticlesDeath1.one_shot = true
+	$ParticlesDeath2.one_shot = true
+	$ParticlesDeath3.one_shot = true
+	$TimerParticles.start()
 
 
 func _on_Top_body_entered(body):
@@ -77,4 +85,7 @@ func _on_Sides_body_entered(body):
 
 func _on_Timer2_timeout():
 	kick = false
+	
+func _on_TimerParticles_timeout():
+	queue_free()
 	
