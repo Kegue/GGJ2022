@@ -306,7 +306,7 @@ func _on_Player_inverted_grav():
 
 
 func damage(amount):
-	$HurtAnimations.play("Hurt")
+	Global.play_sound("res://player_death.wav")
 	
 	hp = hp - amount
 	if hp < 0:
