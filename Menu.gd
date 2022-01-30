@@ -19,7 +19,7 @@ func _ready():
 
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://TestBásico.tscn")
+	get_tree().change_scene("res://Level0.tscn")
 
 
 func _on_OptionsButton_pressed():
