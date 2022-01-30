@@ -246,7 +246,6 @@ max_jump_amount = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 6, 6 )
 frames = SubResource( 9 )
-frame = 2
 playing = true
 
 [node name="HUD" type="Node2D" parent="."]

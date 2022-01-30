@@ -112,6 +112,11 @@ func add_gravity():
 	print("Player has ", coins, " coins")
 	$HUD.update_gravity(gravity)
 	CoinSound.play()
+	
+	
+func _process(delta):
+	if position.y > 500000:
+		Global.reload_scene()
 
 func _physics_process(delta):
 	
