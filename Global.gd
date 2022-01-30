@@ -8,7 +8,7 @@ func next_stage():
 	current_stage += 1
 	get_tree().change_scene("res://Level" + str(current_stage) + ".tscn")
 
-func reset_scene():
+func reload_scene():
 	get_tree().change_scene("res://Level" + str(current_stage) + ".tscn")
 
 

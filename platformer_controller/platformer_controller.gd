@@ -310,7 +310,7 @@ func damage(amount):
 	
 	hp = hp - amount
 	if hp <= 0:
-		Global.reset_scene()
+		Global.reload_scene()
 		hp = 0
 		emit_signal("died")
 		print("Player died")
