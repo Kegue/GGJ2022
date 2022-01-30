@@ -8,7 +8,6 @@ onready var anim = $TransitionPlayer
 onready var textAnim = $TextAnimator
 
 func _ready():
-	textAnim.play("text_fill")
 	swap_entity_collisions()
 	swap_entity_collisions()
 
