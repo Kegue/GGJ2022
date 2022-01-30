@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-const GRAVITY = 10
-const SPEED = 50
+export var GRAVITY = 10
+export var SPEED = 500
 const FLOOR = Vector2(0, -1)
 const LEFT = -1
 const RIGHT = 1

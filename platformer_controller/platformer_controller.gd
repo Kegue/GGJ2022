@@ -113,6 +113,12 @@ func add_gravity():
 	$HUD.update_gravity(gravity)
 	CoinSound.play()
 
+
+func _process(delta):
+	$StuckDetection.set_collision_mask_bit(1,self.get_collision_mask_bit(1))
+	$StuckDetection.set_collision_mask_bit(2,self.get_collision_mask_bit(2))
+
+
 func _physics_process(delta):
 	
 	
@@ -307,6 +313,7 @@ func _on_Player_inverted_grav():
 
 func damage(amount):
 	hp = hp - amount
+	$HurtAnimation.play("Hurt")
 	if hp < 0:
 		hp = 0
 		emit_signal("died")
@@ -325,3 +332,8 @@ func _on_TestBsico_player_death():
 		vel = Vector2.ZERO
 
 
+
+
+func _on_StuckDetection_body_entered(body):
+	print("STUCK ON TILEMAP!")
+	position.y += (-1+int(inverted_gravity)*2)*100
