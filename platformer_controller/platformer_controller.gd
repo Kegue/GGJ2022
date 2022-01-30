@@ -302,6 +302,7 @@ func _on_Player_inverted_grav():
 
 func damage(amount):
 	hp = hp - amount
+	$HurtAnimation.play("Hurt")
 	if hp < 0:
 		hp = 0
 		emit_signal("died")
