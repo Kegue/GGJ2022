@@ -105,11 +105,13 @@ func add_coin():
 	coins += 1
 	print("Player has ", coins, " coins")
 	$HUD.update_coins(coins)
+	CoinSound.play()
 	
 func add_gravity():
 	gravity += 1
 	print("Player has ", coins, " coins")
 	$HUD.update_gravity(gravity)
+	CoinSound.play()
 
 func _physics_process(delta):
 	
@@ -295,6 +297,7 @@ func _on_Player_inverted_grav():
 	if gravity > 0:
 		inverted_gravity = !inverted_gravity
 		gravity -= 1
+		$HUD.update_gravity(gravity)
 		if has_node("PlayerAnimations"):
 			if inverted_gravity:
 				($PlayerAnimations as AnimationPlayer).play("GravUp",0.15)
