@@ -9,7 +9,7 @@ func next_stage():
 	get_tree().change_scene("res://Level" + str(current_stage) + ".tscn")
 
 func reload_scene():
-	get_tree().change_scene("res://Level" + str(current_stage) + ".tscn")
+	get_tree().change_scene("res://Level" + str(current_stage-1) + ".tscn")
 
 
 func play_sound(path):
