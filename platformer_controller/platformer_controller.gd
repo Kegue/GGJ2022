@@ -327,3 +327,11 @@ func _on_TestBsico_player_death():
 		vel = Vector2.ZERO
 
 
+
+
+
+
+
+
+func _on_Restart_pressed():
+	get_tree().reload_current_scene()
