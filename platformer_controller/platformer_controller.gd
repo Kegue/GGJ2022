@@ -151,7 +151,7 @@ func _physics_process(delta):
 	if Input.is_action_just_released(input_jump):
 		holding_jump = false
 		
-	if Input.is_action_just_pressed(input_action):
+	if Input.is_action_just_pressed(input_action) and Global.get_stage() != 0:
 		emit_signal("inverted_grav")
 	
 	var gravity
