@@ -16,8 +16,7 @@ func  _process(delta):
 		anim.play("fade_in")
 	
 	if $Dim1/Player.position.y > min_pos || $Dim1/Player.position.y < max_pos:
-		$Dim1/Player.position = $Dim1/P1_spawn.position
-		print("Reseted player pos")
+		Global.reload_scene()
 	
 
 func swap_entity_collisions():

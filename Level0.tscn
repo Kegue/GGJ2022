@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://sky_full_of_stars.png" type="Texture" id=8]
 [ext_resource path="res://Characters/116aa556-6d14-41e8-9629-696da68b42f3.png" type="Texture" id=9]
 [ext_resource path="res://mountain_night.png" type="Texture" id=10]
-[ext_resource path="res://TextFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Coin.tscn" type="PackedScene" id=12]
 [ext_resource path="res://TutorialText.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Finnish Flag.tscn" type="PackedScene" id=14]
@@ -361,22 +360,6 @@ points = PoolVector2Array( 18, 18, 0, 18, 0, 0, 18, 0 )
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="Animation" id=11]
-resource_name = "text_fill"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Label:percent_visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-
 [node name="TestBásico" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -473,7 +456,6 @@ tile_data = PoolIntArray( -982988, 0, 0, -982852, 0, 0, -917456, 0, 65539, -9174
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0.5, 0.5 )
 motion_offset = Vector2( 0, -50 )
 
@@ -484,7 +466,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 4800, 768 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0.6, 0.45 )
 motion_offset = Vector2( 0, -50 )
 
@@ -495,7 +476,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 4800, 768 )
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0.5, 0.5 )
 motion_offset = Vector2( 0, -50 )
 
@@ -506,7 +486,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 4800, 768 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0.6, 0.45 )
 motion_offset = Vector2( 0, -50 )
 
@@ -515,36 +494,6 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 4800, 768 )
-
-[node name="Label" type="Label" parent="."]
-visible = false
-margin_left = 320.0
-margin_top = -531.0
-margin_right = 923.0
-margin_bottom = -463.0
-custom_fonts/font = ExtResource( 11 )
-text = "Press \"WASD\" to move around.
-Double Jumping is enabled."
-percent_visible = 0.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="."]
-visible = false
-margin_left = 2912.0
-margin_top = -424.0
-margin_right = 3553.0
-margin_bottom = -351.0
-custom_fonts/font = ExtResource( 11 )
-text = "Watch out for enemies!
-Stomp on enemies to kill them."
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextAnimator" type="AnimationPlayer" parent="."]
-anims/text_fill = SubResource( 11 )
 
 [node name="Coin" parent="." instance=ExtResource( 12 )]
 position = Vector2( 340, -52 )
