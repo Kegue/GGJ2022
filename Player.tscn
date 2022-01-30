@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://platformer_controller/platformer_controller.gd" type="Script" id=1]
 [ext_resource path="res://Characters/creature-sheet (1).png" type="Texture" id=2]
@@ -82,6 +82,22 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 )
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "Hurt"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.175, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.360784, 0.360784, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 7.79148, 39.8782 )
 
@@ -97,7 +113,6 @@ max_jump_amount = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 6, 6 )
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="HUD" type="Node2D" parent="."]
@@ -166,6 +181,10 @@ zoom = Vector2( 2, 2 )
 anims/GravDown = SubResource( 1 )
 anims/GravUp = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+
+[node name="HurtAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PlayerAnimations")
+anims/Hurt = SubResource( 12 )
 
 [node name="StuckDetection" type="Area2D" parent="."]
 position = Vector2( 0, 2.5 )
