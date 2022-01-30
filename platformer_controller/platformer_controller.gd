@@ -309,7 +309,8 @@ func damage(amount):
 	Global.play_sound("res://player_death.wav")
 	
 	hp = hp - amount
-	if hp < 0:
+	if hp <= 0:
+		Global.reset_scene()
 		hp = 0
 		emit_signal("died")
 		print("Player died")
