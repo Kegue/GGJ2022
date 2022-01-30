@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://platformer_controller/platformer_controller.gd" type="Script" id=1]
 [ext_resource path="res://Characters/creature-sheet (1).png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Kenney Future.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://HUD.gd" type="Script" id=5]
 [ext_resource path="res://gravity.png" type="Texture" id=6]
+[ext_resource path="res://TextFont.tres" type="DynamicFont" id=7]
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -113,6 +114,7 @@ max_jump_amount = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 6, 6 )
 frames = SubResource( 9 )
+frame = 3
 playing = true
 
 [node name="HUD" type="Node2D" parent="."]
@@ -169,6 +171,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Restart" type="Button" parent="HUD"]
+margin_left = 347.368
+margin_top = -567.368
+margin_right = 667.368
+margin_bottom = -526.368
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 7 )
+text = "Restart LEVEL"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2( 1, 2 )
 polygon = PoolVector2Array( -32, -32, -32, 32, 32, 32, 32, -32 )
@@ -213,6 +228,7 @@ scale = Vector2( 4.16, 0.599999 )
 position = Vector2( 0, 2.5 )
 scale = Vector2( 3.37751, 1.45179 )
 
+[connection signal="pressed" from="HUD/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="body_entered" from="StuckDetection" to="." method="_on_StuckDetection_body_entered"]
 [connection signal="body_entered" from="Top&Bot" to="." method="_on_TopBot_body_entered"]
 [connection signal="body_entered" from="Sides" to="." method="_on_Sides_body_entered"]
