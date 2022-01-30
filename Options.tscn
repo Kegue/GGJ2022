@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://sky_full_of_stars.png" type="Texture" id=2]
+[ext_resource path="res://mountain_night.png" type="Texture" id=3]
+
+[sub_resource type="Theme" id=1]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Label" parent="."]
+margin_left = 341.0
+margin_top = 23.0
+margin_right = 463.0
+margin_bottom = 50.0
+rect_scale = Vector2( 2.649, 2.649 )
+custom_fonts/font = ExtResource( 1 )
+text = "OPTIONS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Label" parent="."]
+margin_left = 100.0
+margin_top = 130.0
+margin_right = 195.0
+margin_bottom = 160.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnOf" type="Label" parent="Music"]
+margin_left = 50.0
+margin_top = 30.0
+margin_right = 180.0
+margin_bottom = 60.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 1 )
+text = "ON/OFF"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckButton" type="CheckButton" parent="Music/OnOf"]
+margin_left = 132.5
+margin_top = -10.0
+margin_right = 208.5
+margin_bottom = 30.0
+
+[node name="Volume" type="Label" parent="Music"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 171.0
+margin_bottom = 77.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 1 )
+text = "Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="Music/Volume"]
+margin_left = 143.106
+margin_right = 193.106
+margin_bottom = 25.0
+rect_scale = Vector2( 1.19356, 1.19356 )
+tick_count = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stress" type="Label" parent="."]
+margin_left = 188.0
+margin_top = 363.0
+margin_right = 228.0
+margin_bottom = 377.0
+text = "Enemies"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SkyFullOfStars" type="Sprite" parent="."]
+position = Vector2( 525, 302 )
+scale = Vector2( 1.11683, 0.696246 )
+z_index = -1
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 921.6 )
+
+[node name="MountainNight" type="Sprite" parent="."]
+position = Vector2( 519, 438 )
+scale = Vector2( 1.11683, 0.696246 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 768 )

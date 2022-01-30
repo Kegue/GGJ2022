@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://new_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Menu.gd" type="Script" id=2]
+[ext_resource path="res://MainMenu.png" type="Texture" id=3]
+[ext_resource path="res://UNSTEADY.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 25
+font_data = ExtResource( 4 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 358.0
+margin_top = 310.0
+margin_right = 554.0
+margin_bottom = 417.0
+rect_scale = Vector2( 1.72395, 0.95583 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+margin_right = 196.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 1 )
+text = "Start Game"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+margin_top = 37.0
+margin_right = 196.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 1 )
+text = "Options"
+
+[node name="QuitBottom" type="Button" parent="VBoxContainer"]
+margin_top = 74.0
+margin_right = 196.0
+margin_bottom = 107.0
+custom_fonts/font = ExtResource( 1 )
+text = "Quit Game"
+
+[node name="MainMenu" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+scale = Vector2( 0.591719, 0.591434 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 314.0
+margin_top = 94.0
+margin_right = 497.0
+margin_bottom = 119.0
+rect_scale = Vector2( 1.52772, 1.77754 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Dimension"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 526.0
+margin_top = 95.0
+margin_right = 639.0
+margin_bottom = 120.0
+rect_scale = Vector2( 2.12, 1.64 )
+custom_fonts/font = SubResource( 2 )
+text = "Shifter"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitBottom" to="." method="_on_QuitBottom_pressed"]

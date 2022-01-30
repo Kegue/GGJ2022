@@ -24,7 +24,7 @@ func death():
 	dead = true
 
 	$AnimatedSprite.stop()
-
+	$AudioStreamPlayer2D.play()
 	$AnimatedSprite.play("Dead")
 	
 	$CollisionPolygon2D.set_deferred("disabled", true)
@@ -78,3 +78,5 @@ func _on_Sides_body_entered(body):
 func _on_Timer2_timeout():
 	kick = false
 	
+
+
